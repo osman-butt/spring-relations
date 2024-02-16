@@ -1,7 +1,11 @@
 package kea.exercise.orderexercise;
 
+import jakarta.persistence.criteria.Order;
+import kea.exercise.orderexercise.model.OrderLine;
 import kea.exercise.orderexercise.model.Product;
+import kea.exercise.orderexercise.repository.OrderLineRepository;
 import kea.exercise.orderexercise.repository.ProductRepository;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -10,8 +14,10 @@ import org.springframework.stereotype.Component;
 public class InitData implements CommandLineRunner {
 
     private final ProductRepository productRepository;
-    public InitData(ProductRepository productRepository) {
+    private OrderLineRepository orderLineRepository;
+    public InitData(ProductRepository productRepository,OrderLineRepository orderLineRepository) {
         this.productRepository = productRepository;
+        this.orderLineRepository = orderLineRepository;
     }
 
     public void run(String... args) {
@@ -37,6 +43,16 @@ public class InitData implements CommandLineRunner {
         product2.setPrice(19.99);
         product2.setEAN13("9780061241895");
         productRepository.save(product2);
+
+        OrderLine line1 = new OrderLine();
+        line1.setProduct(product);
+        line1.setQuantity(3);
+        orderLineRepository.save(line1);
+
+        OrderLine line2 = new OrderLine();
+        line2.setProduct(product);
+        line2.setQuantity(2);
+        orderLineRepository.save(line2);
     }
 
 }
