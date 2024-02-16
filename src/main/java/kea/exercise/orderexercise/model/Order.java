@@ -14,7 +14,7 @@ public class Order {
     private int id;
     private LocalDate orderDate;
     private boolean confirmed;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<OrderLine> orderLines;
 
     public int getId() {
