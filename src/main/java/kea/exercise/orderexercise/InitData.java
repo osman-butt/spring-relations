@@ -50,9 +50,14 @@ public class InitData implements CommandLineRunner {
         orderLineRepository.save(line1);
 
         OrderLine line2 = new OrderLine();
-        line2.setProduct(product);
+        line2.setProduct(product1);
         line2.setQuantity(2);
         orderLineRepository.save(line2);
+
+        OrderLine line3 = new OrderLine();
+        line3.setProduct(product1);
+        line3.setQuantity(0);
+        orderLineRepository.save(line3);
     }
 
 }
